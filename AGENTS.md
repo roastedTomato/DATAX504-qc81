@@ -1,0 +1,4 @@
+- Python 3.11+, TensorFlow/Keras
+- Jupyter notebooks for assignments
+- Student must understand and verify all generated code
+- Course repo follows Deep Learning with Python 3rd ed. patterns
