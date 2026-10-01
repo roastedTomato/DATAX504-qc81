@@ -149,17 +149,17 @@ English: All 21 original image-mask pairs loaded successfully, with no unmatched
 
 **叠加图抽查 / Visual Alignment Review**
 
-中文：抽查 `trainval_01`、`trainval_03` 和 `trainval_08` 各一个 768 × 768 局部窗口。代码按窗口中的前景标注面积选择可见植物较多的区域，仅用于检查对齐，不用于筛选训练数据或改动划分。已查看生成图，未见明显整体平移或图像/标签配错；蓝色作物与橙色杂草标注覆盖对应植物区域。部分人工标注边界较粗，图像有运动模糊。结论仅适用于这三个窗口，不代表所有原图或边缘区域的标注质量都已目视核验；也不证明类别判断完全正确或不存在数据泄漏。建议学生再次目视确认。
+中文：抽查 `trainval_01`、`trainval_03` 和 `trainval_08` 各一个 768 × 768 局部窗口。代码按窗口中的前景标注面积选择可见植物较多的区域，仅用于检查对齐，不用于筛选训练数据或改动划分。我于 2026-10-01 手动检查并确认这三组图像与标签对齐没有问题。蓝色作物与橙色杂草标注覆盖对应植物区域。部分人工标注边界较粗，图像有运动模糊。结论仅适用于这三个窗口，不代表所有原图或边缘区域的标注质量都已目视核验；也不证明类别判断完全正确或不存在数据泄漏。
 
-English: Reviewed one 768 × 768 crop each from `trainval_01`, `trainval_03`, and `trainval_08`. The code selects plant-containing windows by annotated foreground area for alignment inspection only, without filtering training data or changing splits. Inspection of the generated figure found no obvious global displacement or mismatched image-mask pairs; blue crop and orange weed annotations cover corresponding plant regions. Some manual boundaries are coarse and the imagery contains motion blur. This finding applies only to these three windows, not to all originals or edge regions, and does not establish perfect class labeling or absence of leakage. The student should also review the figure.
+English: Reviewed one 768 × 768 crop each from `trainval_01`, `trainval_03`, and `trainval_08`. The code selects plant-containing windows by annotated foreground area for alignment inspection only, without filtering training data or changing splits. On 2026-10-01, I manually reviewed these three examples and confirmed no image-mask alignment issues. Blue crop and orange weed annotations cover corresponding plant regions. Some manual boundaries are coarse and the imagery contains motion blur. This finding applies only to these three windows, not to all originals or edge regions, and does not establish perfect class labeling or absence of leakage.
 
 ![Alignment review: trainval originals only](artifacts/figures/file_inspection_overlays.png)
 
 **代码与记录 / Code and Records**
 
-中文：英文代码与运行输出位于 `project_todo.ipynb` 的 1.4；自动结果及抽查坐标位于 `artifacts/FILE_INSPECTION.json`；叠加图位于 `artifacts/figures/file_inspection_overlays.png`。自动记录的 `visual_review: pending` 表示代码生成图片后仍需目视审查；本节记录的上述结论来自随后对图片的查看，而非自动检测。
+中文：英文代码与运行输出位于 `project_todo.ipynb` 的 1.4；检查结果及抽查坐标位于 `artifacts/FILE_INSPECTION.json`；叠加图位于 `artifacts/figures/file_inspection_overlays.png`。目视确认状态已更新为 `visual_review: confirmed_by_student`，并记录日期与结论。这是我的手动确认，而非自动对齐检测。重新运行检查代码会重新生成待审查记录，新生成图片需要再次确认。
 
-English: English code and execution outputs are in Section 1.4 of `project_todo.ipynb`. Automatic results and crop coordinates are saved in `artifacts/FILE_INSPECTION.json`; the figure is in `artifacts/figures/file_inspection_overlays.png`. The automatic record's `visual_review: pending` means the generated figure still requires visual inspection. The findings documented above come from subsequent inspection of that figure, not an automatic alignment detector.
+English: English code and execution outputs are in Section 1.4 of `project_todo.ipynb`. Inspection results and crop coordinates are saved in `artifacts/FILE_INSPECTION.json`; the figure is in `artifacts/figures/file_inspection_overlays.png`. The status is now `visual_review: confirmed_by_student`, with the review date and finding recorded. This is my manual confirmation, not an automatic alignment detector. Rerunning the inspection code regenerates a pending review record; newly generated figures require confirmation again.
 
 ### 1.5 来源与泄漏风险 / Source Mapping and Leakage Risks
 
