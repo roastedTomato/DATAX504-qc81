@@ -94,8 +94,37 @@ English: This checksum identifies the snapshot used in this project; it is not a
 
 ### 1.3 来源与许可 / Provenance and Licensing
 
-- [ ] 确认原始研究及修改版来源。 / Identify the original research and modified dataset provenance.
-- [ ] 核实许可证、署名要求和伦理事项。 / Review licensing, attribution requirements, and ethical considerations.
+**原始研究与数据 / Original Research and Data**
+
+中文：原始研究为 Genze, N., Ajekwe, R., Güreli, Z., Haselbeck, F., Grieb, M., & Grimm, D. G. (2022), *Deep learning-based early weed segmentation using motion blurred UAV images of sorghum fields*, Computers and Electronics in Agriculture, 202, 107388，[论文 DOI](https://doi.org/10.1016/j.compag.2022.107388)。作者在 [Mendeley Data 第 4 版](https://data.mendeley.com/datasets/4hh45vkp38/4) 发布数据，并提供 [GitHub 代码](https://github.com/grimmlab/UAVWeedSegmentation)。数据发布说明指出图像来自德国南部的高粱试验田，使用 UAV 拍摄并进行人工标注。因此，它不是新西兰田地数据，不能据此声称已验证新西兰农业场景的性能。
+
+English: The original study is Genze, N., Ajekwe, R., Güreli, Z., Haselbeck, F., Grieb, M., & Grimm, D. G. (2022), *Deep learning-based early weed segmentation using motion blurred UAV images of sorghum fields*, Computers and Electronics in Agriculture, 202, 107388 ([paper DOI](https://doi.org/10.1016/j.compag.2022.107388)). The authors released [Mendeley Data version 4](https://data.mendeley.com/datasets/4hh45vkp38/4) and [GitHub code](https://github.com/grimmlab/UAVWeedSegmentation). The data description identifies a sorghum experimental field in Southern Germany, with UAV imagery and manual annotations. This is not New Zealand field data, so performance in New Zealand agricultural settings remains untested.
+
+**修改版来源 / Modified Dataset Provenance**
+
+中文：本项目实际下载的是 [Bouhadjer 的 Kaggle 修改版](https://www.kaggle.com/datasets/bouhadjer/crop-weed-segmentation-uav-rgb-indices)。本地 `data/raw/License.txt` 与 `readme.txt` 说明其包含 RGB、标签、RGB 植被指数和切图/增强版本，并关联题为 *Dual-Branch Deep Learning with RGB-Based Vegetation Indices for Precise Weed Segmentation in UAV Crop Images* 的研究。本次未查到该题名可独立核实的正式出版记录或 DOI，因此只记录为发布者的来源说明，不将其作为已核实的正式论文引用。原始研究和本项目使用的数据修改版需要分别注明。
+
+English: This project downloaded [Bouhadjer's modified Kaggle dataset](https://www.kaggle.com/datasets/bouhadjer/crop-weed-segmentation-uav-rgb-indices). The local `data/raw/License.txt` and `readme.txt` describe RGB images, masks, RGB vegetation indices, and patched/augmented versions, associated with a study titled *Dual-Branch Deep Learning with RGB-Based Vegetation Indices for Precise Weed Segmentation in UAV Crop Images*. No independently verifiable publication record or DOI for that exact title was located in this review. Treat it as the publisher's provenance statement rather than a verified published paper. Credit the original research and the modified dataset separately.
+
+**许可证与署名 / Licensing and Attribution**
+
+| 依据 / Evidence | 查验结论 / Finding |
+| --- | --- |
+| 原始 Mendeley Data 第 4 版 / Original Mendeley Data version 4 | 页面明确标注 MIT / Explicitly lists MIT |
+| Kaggle 发布页面 / Kaggle data card | 前次查验记录为 CC BY 4.0；本次网页工具未返回正文 / Previously recorded as CC BY 4.0; the page body was unavailable through the web tool in this review |
+| 本地 `data/raw/License.txt` / Local license file | 自定义授权文字允许研究、教育和商业使用，要求注明原始作者和修改者 / Custom permission text allows research, educational, and commercial use with attribution to original creators and the modifier |
+
+中文：页面许可标记和包内授权文本不是同一份许可证全文。本项目保留包内许可证，报告与 README 同时引用原始论文、原始数据 DOI 和实际使用的 Kaggle 页面，并注明 RGB-only 选择及后续预处理修改。下载包和原始数据不随课程代码仓库重新发布，提供来源与获取方法。若将来重新分发数据，需进一步确认适用条款并保留所要求的版权、许可和署名文字。包内修改者姓名写作 “Mohaned El Amine BOUHADJER”，与此前页面记录的拼写不同；其 example.com 邮箱不作为真实联系地址，署名优先链接 Kaggle 发布者页面并说明包内写法。
+
+English: The page's license label and the bundled permission text are not the same license document. Preserve the bundled license. Cite the original paper, original data DOI, and the Kaggle dataset actually used in the report and README, and describe RGB-only selection and subsequent preprocessing changes. Do not republish downloaded or original data in the course code repository; provide source links and acquisition instructions. Any future redistribution requires confirming the applicable terms and preserving required copyright, license, and attribution notices. The bundled modifier name is spelled “Mohaned El Amine BOUHADJER,” differing from the previously recorded page spelling. Do not use its example.com email as a real contact address; link to the Kaggle publisher and document the bundled spelling.
+
+**伦理与适用限制 / Ethics and Intended Use**
+
+中文：项目使用公开农业影像，不新增无人机采集或个人数据收集。展示前仍需检查图片是否包含可识别个人或敏感信息；当前未完成逐张隐私审查。输出仅用于课程实验和杂草分布可视化，不直接用于自动喷药。报告需披露 AI 辅助，并如实说明地域差异、标注局限和来源相关性。原始数据页面说明拍摄有约 10% 的重叠；具体跨集合空间重叠需在 1.5 单独查验，不能因文件名不同就认定完全独立。
+
+English: The project uses public agricultural imagery without collecting new UAV or personal data. Check images for identifiable people or sensitive information before displaying them; a full image-by-image privacy review has not been completed. Outputs are for coursework and weed-distribution visualization, not direct automatic spraying. Disclose AI assistance and describe geographical differences, annotation limitations, and source correlations honestly. The original data page reports approximately 10% capture overlap. Cross-split spatial overlap requires separate review in Section 1.5; distinct filenames do not establish complete independence.
+
+查验日期 / Review date: 2026-10-01. 本节为资料核验，不需要新增代码。 / This section is a documentary review and requires no additional code.
 
 ### 1.4 文件检查 / File Inspection
 
