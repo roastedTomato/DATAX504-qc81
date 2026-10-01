@@ -66,8 +66,31 @@ English: Use Python 3.11+, TensorFlow/Keras, and a Jupyter notebook, following t
 
 ### 1.2 数据获取 / Data Acquisition
 
-- [ ] 记录数据集名称、来源链接和下载方式。 / Record the dataset name, source URL, and download method.
-- [ ] 获取 RGB 图像及标签，确定存放路径。 / Obtain RGB images and masks and define storage paths.
+**数据集与获取方式 / Dataset and Acquisition Method**
+
+中文：数据集为 Crop-Weed Segmentation UAV RGB+Indices，[发布页面](https://www.kaggle.com/datasets/bouhadjer/crop-weed-segmentation-uav-rgb-indices)。通过 Kaggle 公开下载接口获取 ZIP；已有本地压缩包时复用，避免重复下载。仅提取原始 RGB 图像、对应标签和说明文件，暂不提取植被指数及预先增强的 patches。
+
+English: The dataset is Crop-Weed Segmentation UAV RGB+Indices ([dataset page](https://www.kaggle.com/datasets/bouhadjer/crop-weed-segmentation-uav-rgb-indices)). Obtain the ZIP through Kaggle's public download endpoint, reusing an existing local archive when available. Extract only original RGB images, corresponding masks, and documentation, leaving vegetation indices and pre-augmented patches in the archive.
+
+**存放路径 / Storage Paths**
+
+| 内容 / Content | 项目内路径 / Project-relative Path |
+| --- | --- |
+| 原始下载 / Downloaded archive | `data/downloads/dataset.zip` |
+| 原始 RGB 与标签 / Original RGB images and masks | `data/raw/` |
+| 获取代码 / Acquisition code | `project_todo.ipynb`, section 1.2 |
+
+**实际运行记录 / Execution Record — 2026-10-01**
+
+中文：复用本地已下载 ZIP，并重新计算 SHA-256。文件大小为 2,590,700,651 bytes，校验值与固定快照一致。读取 42 个原始图像/标签文件及 3 个说明文件；已存在的提取文件与压缩包内容逐字节一致，因此无需重复写入。
+
+English: Reused the downloaded local ZIP and recomputed its SHA-256. The archive is 2,590,700,651 bytes and matches the pinned snapshot. Read 42 original image/mask files and three documentation files. Existing extracted files matched the archive byte for byte, so no rewriting was necessary.
+
+SHA-256: `1cd9eddab9c5e132f679f0b223591c2ef549282920b447a693525f973e4775e3`
+
+中文：校验值用于识别本项目所使用的快照，并非作者提供的官方校验值。若未来下载版本不同，代码会停止，需查明版本变化后再更新快照。来源与许可、文件质量和数据泄漏问题分别在 1.3–1.5 处理。本次验证了本地复用与提取路径，未重新执行网络下载分支。
+
+English: This checksum identifies the snapshot used in this project; it is not an official checksum supplied by the author. If a future download differs, the code stops until the version change is reviewed. Licensing, file quality, and leakage are addressed in Sections 1.3–1.5. This run verified local reuse and extraction; the network download branch was not rerun.
 
 ### 1.3 来源与许可 / Provenance and Licensing
 
