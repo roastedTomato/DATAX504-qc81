@@ -128,8 +128,38 @@ English: The project uses public agricultural imagery without collecting new UAV
 
 ### 1.4 文件检查 / File Inspection
 
-- [ ] 统计目录、数量、尺寸，检查缺失文件和图像/标签配对。 / Inspect directories, counts, dimensions, missing files, and image-mask pairing.
-- [ ] 核实标签颜色与类别定义。 / Verify mask colors and class definitions.
+**检查方法 / Inspection Method**
+
+中文：本节保留三项必要检查。先按文件名的来源编号建立 RGB 与标签的一对一对应关系（处理额外测试图的 `_img` / `_msk` 后缀），不靠排序配对；读取每对文件，确认尺寸一致；再检查标签每个像素是否属于三个规定 RGB 颜色。最后仅从 trainval 展示三组原图、标签和前景叠加图，目视检查是否存在明显错位。没有计算用于训练的测试集统计量，也没有进行模型评估或调整划分。
+
+English: This section implements three essential checks. Match RGB images and masks by source identifiers, handling the `_img` / `_msk` suffixes in the extra test sets rather than relying on sorting. Load each pair and verify equal dimensions, then validate every mask pixel against the three expected RGB colors. Display three RGB/mask/foreground-overlay examples from trainval only and visually review alignment. No test-derived training statistics, model evaluation, or split adjustments are performed.
+
+**自动检查结果 / Automatic Check Results — 2026-10-01**
+
+| 原始集合 / Original Group | 配对数量 / Pairs | 尺寸（宽×高）/ Dimensions (W×H) | 结果 / Result |
+| --- | ---: | --- | --- |
+| trainval | 12 | 5472 × 3648 | 配对、尺寸、颜色通过 / Pairing, dimensions, colors passed |
+| test | 7 | 5472 × 3648 | 配对、尺寸、颜色通过 / Pairing, dimensions, colors passed |
+| extra_bbch15 | 1 | 2560 × 2816 | 配对、尺寸、颜色通过 / Pairing, dimensions, colors passed |
+| extra_bbch19 | 1 | 2560 × 2816 | 配对、尺寸、颜色通过 / Pairing, dimensions, colors passed |
+
+中文：全部 21 对原始图像与标签均可读取，没有缺少或多出的对应标签，尺寸全部一致；未知标签颜色像素为 0。三种规定颜色分别为土壤/背景 (199, 199, 199)、高粱 (31, 119, 180)、杂草 (255, 127, 14)。没有要求每张标签都包含全部三类。本节不检查已有增强 patches；后续切图流程需要单独验证其产出。
+
+English: All 21 original image-mask pairs loaded successfully, with no unmatched images or masks and matching dimensions throughout. There were zero pixels with unexpected mask colors. Expected colors are soil/background (199, 199, 199), sorghum (31, 119, 180), and weeds (255, 127, 14). Individual masks are not required to contain all three classes. Existing augmented patches are outside this inspection; subsequent patch generation requires its own validation.
+
+**叠加图抽查 / Visual Alignment Review**
+
+中文：抽查 `trainval_01`、`trainval_03` 和 `trainval_08` 各一个 768 × 768 局部窗口。代码按窗口中的前景标注面积选择可见植物较多的区域，仅用于检查对齐，不用于筛选训练数据或改动划分。已查看生成图，未见明显整体平移或图像/标签配错；蓝色作物与橙色杂草标注覆盖对应植物区域。部分人工标注边界较粗，图像有运动模糊。结论仅适用于这三个窗口，不代表所有原图或边缘区域的标注质量都已目视核验；也不证明类别判断完全正确或不存在数据泄漏。建议学生再次目视确认。
+
+English: Reviewed one 768 × 768 crop each from `trainval_01`, `trainval_03`, and `trainval_08`. The code selects plant-containing windows by annotated foreground area for alignment inspection only, without filtering training data or changing splits. Inspection of the generated figure found no obvious global displacement or mismatched image-mask pairs; blue crop and orange weed annotations cover corresponding plant regions. Some manual boundaries are coarse and the imagery contains motion blur. This finding applies only to these three windows, not to all originals or edge regions, and does not establish perfect class labeling or absence of leakage. The student should also review the figure.
+
+![Alignment review: trainval originals only](artifacts/figures/file_inspection_overlays.png)
+
+**代码与记录 / Code and Records**
+
+中文：英文代码与运行输出位于 `project_todo.ipynb` 的 1.4；自动结果及抽查坐标位于 `artifacts/FILE_INSPECTION.json`；叠加图位于 `artifacts/figures/file_inspection_overlays.png`。自动记录的 `visual_review: pending` 表示代码生成图片后仍需目视审查；本节记录的上述结论来自随后对图片的查看，而非自动检测。
+
+English: English code and execution outputs are in Section 1.4 of `project_todo.ipynb`. Automatic results and crop coordinates are saved in `artifacts/FILE_INSPECTION.json`; the figure is in `artifacts/figures/file_inspection_overlays.png`. The automatic record's `visual_review: pending` means the generated figure still requires visual inspection. The findings documented above come from subsequent inspection of that figure, not an automatic alignment detector.
 
 ### 1.5 来源与泄漏风险 / Source Mapping and Leakage Risks
 
